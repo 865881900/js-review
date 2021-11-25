@@ -21,14 +21,15 @@ Object.defineProperty(Array.prototype, 'reduce1', {
     }
     // eslint-disable-next-line no-plusplus
     for (let j = i; j < list.length; j++) {
-      console.log('遍历');
-      value = callback(value, list[i], j, list);
+      // 保存本次的返回值, 当做下一次的参数用
+      value = callback(value, list[j], j, list);
     }
+    // 返回最终的值
     return value;
   },
 });
 
 // 测试
 const arr = [1, 2, 3, 4, 5];
-const value = arr.reduce1((i, j) => i + j);
+const value = arr.reduce1((i, j) => `${i}${j}`);
 console.log(value);
