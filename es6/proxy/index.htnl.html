@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+// 实现生成各种节点DOM
+const dom = new Proxy({}, {
+  get(target, p, receiver) {
+    console.log(target, p, receiver);
+
+    /**
+     *
+     * @param attrs dom的属性
+     * @param childern dom的子阶段
+     */
+    function creatDom(attrs, ...childern) {
+      // 给节点添加属性
+      const dom = document.createElement(p);
+      Object.keys(attrs)
+        .forEach((key) => {
+          dom.setAttribute(key, attrs[key]);
+        });
+
+      childern.forEach((child) => {
+        if (typeof child === "string") {
+          // eslint-disable-next-line no-param-reassign
+          child = document.createTextNode(child);
+        }
+        console.log(child);
+        dom.appendChild(child);
+      });
+      return dom;
+    }
+
+    return creatDom;
+  }
+});
+
+const el = dom.div({},
+  "Hello, my name is ",
+  dom.a({ href: "//example.com" }, "Mark"),
+  ". I like:",
+  dom.ul({},
+    dom.li({}, "The web"),
+    dom.li({}, "Food"),
+    dom.li({}, "…actually that's it")
+  )
+);
+
+console.log(el);
+document.body.appendChild(el);
+
+
+</script>
+</body>
+</html>

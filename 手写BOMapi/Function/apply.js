@@ -20,11 +20,12 @@ Object.defineProperty(Function.prototype, 'apply1', {
     // 此时的this为函数本身,函数也是Objec的派生类,
     const fun = this;
     // 声明一个Symbol类型,表示不能被重复, 不会冲掉对象原有的方法;
-    const funName = Symbol('fun');
+    // const funName = Symbol('fun');
+    const funName = 'funName';
     // 把函数赋值为该对象的函数
     context[funName] = fun;
     // 执行函数,并拿到返回结果
-    const returnData = context[funName](...args);
+    const returnData = context[funName](args[0], args[1]);
     //  删除这个属相
     delete context[funName];
     // 返回函数执行结果
@@ -70,7 +71,7 @@ const b = {
   name: '这是b的name',
 };
 
-// 测试a
+// 测试1
 a.getName.apply1(b, ['这是参数1', '这是参数2']);
 // 测试2
-a.getName.apply2(b, ['这是参数1', '这是参数2']);
+// a.getName.apply2(b, ['这是参数1', '这是参数2']);

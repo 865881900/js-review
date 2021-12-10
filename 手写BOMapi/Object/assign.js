@@ -1,20 +1,34 @@
 /**
- * 实现object.assign函数
+ * 实现object.assign:方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。
  * @param target
  * @return {*}
  */
-Object.prototype.assign1 = function(target) {
-    //判断是否为对象
-    if (typeof target !== 'object') {
-        throw  'target 必须为对象'
+// eslint-disable-next-line no-extend-native
+Object.defineProperty(Object.prototype, 'assign1', {
+  value(target, ...args) {
+    // 判断是否为对象并且不能为null
+    if (typeof target !== 'object' || target === null) {
+      throw new TypeError('target 必须为对象并不能为null');
     }
-    const sources = Array.prototype.splice.call(arguments, 1)
-    sources.forEach(item => {
-        for (const itemKey in item) {
-            if (item.hasOwnProperty(itemKey)) {
-                target[itemKey] = item[itemKey]
-            }
-        }
-    })
-    return target
-}
+    // 如果为null,
+    const d = target;
+    // 遍历剩余参数
+    args.forEach((item) => {
+      // 获取可枚举的属相数组
+      Object.keys(item).forEach((k) => {
+        // 赋值给源数组
+        d[k] = item[k];
+      });
+    });
+
+    return d;
+  },
+});
+
+const a = { a: 1 };
+const b = { b: 2 };
+const c = { b: 3 };
+const d = { a: 4 };
+
+const e = Object.assign1(a, b, c, d);
+console.log(e);

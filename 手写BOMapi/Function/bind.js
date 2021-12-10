@@ -61,9 +61,9 @@ const b = {
 };
 
 // 测试1
-const f1 = a.getName.bind1(b);
-f1(1, 2, 3, 4);
+const f1 = a.getName.bind1(b, 1);
+f1(2, 3, 4);
 
-// 测试2
-const f2 = a.getName.bind2(b);
-f2(1, 2, 3, 4);
+// // 测试2
+// const f2 = a.getName.bind2(b);
+// f2(1, 2, 3, 4);

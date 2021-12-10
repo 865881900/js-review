@@ -16,6 +16,7 @@ function debounce(fun, time = 300) {
     setTimeoutId = setTimeout(() => {
       try {
         fun.call(that, arg);
+        clearTimeout(setTimeoutId);
       } catch (e) {
         // 如果出现异常, 关闭演示执行代码, 防止内存泄漏
         clearTimeout(setTimeoutId);

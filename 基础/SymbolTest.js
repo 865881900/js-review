@@ -18,7 +18,7 @@
 //     }
 //
 //     // 通过继承父类添加get方法实现
-//     get [Symbol.isConcatSpreadable]() {
+//     index.js [Symbol.isConcatSpreadable]() {
 //         return false
 //     }
 // }
@@ -40,7 +40,7 @@
 //         super(...argue);
 //     }
 //
-//     static get [Symbol.species]() {
+//     static index.js [Symbol.species]() {
 //         return Object;
 //     }
 // }
